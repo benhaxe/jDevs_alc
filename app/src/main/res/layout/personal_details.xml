@@ -90,21 +90,21 @@
                             android:text="username"/>
 
                         <LinearLayout
-                            android:id="@+id/url_link"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_marginTop="8dp">
 
                             <ImageView
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/ic_link"
-                                android:padding="10dp"
+                                android:padding="12dp"
                                 android:background="@drawable/image_round"/>
 
                             <TextView
+                                android:id="@+id/url_link"
                                 style="@style/link"
                                 android:text="github.com/benhaxe"/>
                         </LinearLayout>

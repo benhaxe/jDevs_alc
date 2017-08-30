@@ -141,7 +141,9 @@ public class MainActivity extends AppCompatActivity {
 
                     String serverProfilePicUrl = object.getString("avatar_url");
 
-                    Users githubUsers = new Users(serverProfilePicUrl, userName);
+                    String uLink = object.getString("html_url");
+
+                    Users githubUsers = new Users(serverProfilePicUrl, userName, uLink);
                     users.add(githubUsers);
                 }
                 page = page +1;
@@ -181,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+
+                page = page++;
             }
         });
     }

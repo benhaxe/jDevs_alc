@@ -10,14 +10,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PersonalDetails extends AppCompatActivity implements View.OnClickListener{
 
     ImageView user_bak;
     CircleImageView user_image;
-    TextView user_full_name, username;
-    LinearLayout url_link;
+    TextView username, url_link;
 
     Button user_share;
 
@@ -30,18 +31,22 @@ public class PersonalDetails extends AppCompatActivity implements View.OnClickLi
 
         user_bak = (ImageView) findViewById(R.id.user_bak);
         user_image = (CircleImageView) findViewById(R.id.user_image);
-        user_full_name = (TextView) findViewById(R.id.user_full_name);
         username = (TextView) findViewById(R.id.username);
-        url_link = (LinearLayout) findViewById(R.id.url_link);
+        url_link = (TextView) findViewById(R.id.url_link);
         user_share = (Button) findViewById(R.id.user_share);
 
         url_link.setOnClickListener(this);
         user_share.setOnClickListener(this);
 
         Intent intent = getIntent();
-        String myusername = intent.getStringExtra("login");
+        String mUsername = intent.getStringExtra("username");
+        String mUser_image = intent.getStringExtra("avatar");
+        String user_url = intent.getStringExtra("url");
 
-        username.setText(myusername);
+        username.setText(mUsername);
+        Picasso.with(this).load(mUser_image).fit().placeholder(R.drawable.person_dummy).into(user_image);
+        Picasso.with(this).load(mUser_image).fit().placeholder(R.drawable.person_dummy).into(user_bak);
+        url_link.setText(user_url);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -59,6 +64,10 @@ public class PersonalDetails extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.user_share:
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TEXT,"Check out this java developer@\n");
+                startActivity(i);
                 break;
         }
     }

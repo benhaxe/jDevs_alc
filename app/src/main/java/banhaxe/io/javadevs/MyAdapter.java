@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -47,6 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private CircleImageView github_proflile_image;
         private TextView github_username;
+        private TextView mUrl;
 
         public ViewHolder (View v){
             super(v);
@@ -67,6 +70,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 Intent intent = new Intent(context, PersonalDetails.class);
                 String username = usersList.get(holder.getAdapterPosition()).login;
                 String avatar = usersList.get(holder.getAdapterPosition()).avatar_url;
+                String url = usersList.get(holder.getAdapterPosition()).html_url;
 
                 intent.putExtra("username", username);
                 intent.putExtra("avatar", avatar);
