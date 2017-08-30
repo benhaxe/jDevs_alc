@@ -106,7 +106,7 @@
                             <TextView
                                 android:id="@+id/url_link"
                                 style="@style/link"
-                                android:text="github.com/benhaxe"/>
+                                android:text="github.com/..."/>
                         </LinearLayout>
 
                     </LinearLayout>
