@@ -42,12 +42,11 @@ public class PersonalDetails extends AppCompatActivity implements View.OnClickLi
         Intent intent = getIntent();
         String mUsername = intent.getStringExtra("username");
         String mUser_image = intent.getStringExtra("avatar");
-        String user_url = intent.getStringExtra("url");
+//        String user_url = intent.getStringExtra("url");
 
         username.setText(mUsername);
         Picasso.with(this).load(mUser_image).fit().placeholder(R.drawable.person_dummy).into(user_image);
         Picasso.with(this).load(mUser_image).fit().placeholder(R.drawable.person_dummy).into(user_bak);
-        url_link.setText(user_url);
         url_link.setPaintFlags(url_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
     @Override
