@@ -51,6 +51,9 @@ public class PersonalDetails extends AppCompatActivity implements View.OnClickLi
 
         url_link.setText(user_url);
         url_link.setPaintFlags(url_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        String title = getIntent().getStringExtra("username");
+        setTitle(title +"'s" + " Profile");
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
