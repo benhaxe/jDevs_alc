@@ -20,7 +20,7 @@
             android:layout_height="55dp"
             android:layout_margin="10dp"
             android:src="@drawable/person_dummy"
-            app:civ_border_color="@color/generalAppColor"
+            app:civ_border_color="@color/actionbarTop"
             app:civ_border_width="2.3dp" />
 
         <LinearLayout

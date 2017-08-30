@@ -55,6 +55,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             super(v);
             github_proflile_image = (CircleImageView)  itemView.findViewById(R.id.github_progile_image);
             github_username = (TextView) itemView.findViewById(R.id.github_username);
+            mUrl = (TextView) itemView.findViewById(R.id.url_link);
         }
     }
     @Override
@@ -74,6 +75,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
                 intent.putExtra("username", username);
                 intent.putExtra("avatar", avatar);
+                intent.putExtra("url", url);
                 context.startActivity(intent);
             }
         });

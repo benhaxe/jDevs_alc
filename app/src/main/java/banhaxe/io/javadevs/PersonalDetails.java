@@ -2,6 +2,7 @@ package banhaxe.io.javadevs;
 
 import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -42,11 +43,13 @@ public class PersonalDetails extends AppCompatActivity implements View.OnClickLi
         Intent intent = getIntent();
         String mUsername = intent.getStringExtra("username");
         String mUser_image = intent.getStringExtra("avatar");
-//        String user_url = intent.getStringExtra("url");
+        String user_url = intent.getStringExtra("url");
 
         username.setText(mUsername);
         Picasso.with(this).load(mUser_image).fit().placeholder(R.drawable.person_dummy).into(user_image);
         Picasso.with(this).load(mUser_image).fit().placeholder(R.drawable.person_dummy).into(user_bak);
+
+        url_link.setText(user_url);
         url_link.setPaintFlags(url_link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
     @Override
@@ -62,12 +65,18 @@ public class PersonalDetails extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.url_link:
+                String url = getIntent().getStringExtra("url");
+                Intent toBrowser = new Intent(Intent.ACTION_VIEW);
+                toBrowser.setData(Uri.parse(url));
+                startActivity(toBrowser);
                 break;
 
             case R.id.user_share:
+                String share = getIntent().getStringExtra("username");
+                String share_url = getIntent().getStringExtra("url");
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plain");
-                i.putExtra(Intent.EXTRA_TEXT,"Check out this java developer@\n");
+                i.putExtra(Intent.EXTRA_TEXT,"Hey geek, meet this cool dude on Git Hub \n" + "Username: " + share + "\n" + "GitHub Link: " + share_url);
                 startActivity(i);
                 break;
         }

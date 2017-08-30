@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
     MyAdapter myAdapter;
+    ProgressDialog loading;
     ProgressBar load;
     List<Users> users;
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.user_each);
         recyclerView.setHasFixedSize(true);
         load = (ProgressBar) findViewById(R.id.loading);
+        loading = new ProgressDialog(MainActivity.this);
 
         users = new ArrayList<>();
 
@@ -78,35 +80,8 @@ public class MainActivity extends AppCompatActivity {
         });
         return builder;
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search, menu);
-
-        MenuItem item = menu.findItem(R.id.action_search);
-
-        SearchView searchView = (SearchView)item.getActionView();
-
-        /*searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });*/
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 
     private class myTask extends AsyncTask <String, Void, String>{
-        ProgressDialog loading = new ProgressDialog(MainActivity.this);
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -174,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                new myTask().execute();
             }
         });
     }
@@ -183,8 +158,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
-                page = page++;
+                if(!recyclerView.canScrollVertically(1)) {
+                    page = page++;
+                    loading.dismiss();
+                    new myTask().execute();
+                }
             }
         });
     }
