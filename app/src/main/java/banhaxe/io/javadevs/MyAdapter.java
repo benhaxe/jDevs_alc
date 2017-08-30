@@ -1,6 +1,7 @@
 package banhaxe.io.javadevs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
@@ -46,7 +47,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private CircleImageView github_proflile_image;
         private TextView github_username;
-        private TextView repos;
 
         public ViewHolder (View v){
             super(v);
@@ -60,5 +60,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         holder.github_username.setText(eachUser.login);
         Picasso.with(context).load(eachUser.avatar_url).fit().placeholder(R.drawable.person_dummy).into(holder.github_proflile_image);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PersonalDetails.class);
+                String username = usersList.get(holder.getAdapterPosition()).login;
+                String avatar = usersList.get(holder.getAdapterPosition()).avatar_url;
+
+                intent.putExtra("username", username);
+                intent.putExtra("avatar", avatar);
+                context.startActivity(intent);
+            }
+        });
     }
 }
